@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" data-doc-type="short-story">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PaperMint forges downloadable PDFs filled with random, beautifully typeset content. Everything runs locally in your browser.">
+  <title>PaperMint — random PDF forge</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="grain"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"><i></i></span>
+      <span class="brand-text">
+        <span class="brand-name">PaperMint</span>
+        <span class="brand-tag">random document forge</span>
+      </span>
+    </div>
+    <div class="topbar-right">
+      <span class="local-badge"><span class="pulse"></span> generated locally</span>
+      <span class="version">v1.0</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="panel" aria-labelledby="recipe-title">
+      <div class="panel-head">
+        <span class="step">01</span>
+        <h2 id="recipe-title">Document recipe</h2>
+      </div>
+      <p class="panel-lede">Pick a genre, tune the length, roll a seed. PaperMint writes the rest.</p>
+
+      <div class="field">
+        <label for="docType">Genre</label>
+        <div class="select-wrap">
+          <select id="docType">
+            <option value="short-story">Short story</option>
+            <option value="field-report">Field report</option>
+            <option value="recipe">Recipe card</option>
+            <option value="technical-memo">Technical memo</option>
+            <option value="poetry">Poetry chapbook</option>
+            <option value="interview">Interview transcript</option>
+            <option value="travelogue">Travelogue</option>
+            <option value="manual">Product manual</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="label-row">
+          <label for="pageCount">Length</label>
+          <output id="pageCountOut" for="pageCount">3 pages</output>
+        </div>
+        <input id="pageCount" type="range" min="1" max="8" step="1" value="3">
+        <div class="range-ticks" aria-hidden="true"><span>1</span><span>4</span><span>8</span></div>
+      </div>
+
+      <div class="field">
+        <label for="tone">Voice</label>
+        <div class="select-wrap">
+          <select id="tone">
+            <option value="whimsical">Whimsical</option>
+            <option value="deadpan">Deadpan</option>
+            <option value="lyrical">Lyrical</option>
+            <option value="technical">Technical</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="seed">Seed</label>
+        <div class="seed-row">
+          <input id="seed" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" value="4821" aria-describedby="seed-hint">
+          <button id="reroll" class="ghost" type="button" title="Roll a new seed">Roll</button>
+        </div>
+        <p class="hint" id="seed-hint">Same seed, same document. Every time.</p>
+      </div>
+
+      <div class="actions">
+        <button id="generate" class="primary" type="button">
+          <span>Forge PDF</span>
+          <span class="primary-key" aria-hidden="true">G</span>
+        </button>
+        <button id="download" class="secondary" type="button">
+          <span class="download-icon" aria-hidden="true"></span>
+          <span>Download .pdf</span>
+        </button>
+      </div>
+
+      <p class="privacy">No uploads. No accounts. The PDF is assembled byte by byte in this tab.</p>
+    </section>
+
+    <section class="preview-panel" aria-labelledby="preview-title">
+      <div class="preview-head">
+        <div class="preview-title-wrap">
+          <span class="step">02</span>
+          <div>
+            <h2 id="preview-title">Preview</h2>
+            <p id="docTitle" class="doc-title">—</p>
+          </div>
+        </div>
+        <div class="chips" aria-live="polite">
+          <span id="chipPages" class="chip">3 pages</span>
+          <span id="chipWords" class="chip">0 words</span>
+          <span id="chipSize" class="chip">0 KB</span>
+        </div>
+      </div>
+
+      <div class="paper-stage">
+        <div class="paper-ruler" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="paper" id="paper" aria-label="Preview of the generated PDF page">
+          <div class="paper-empty">Forging your document…</div>
+        </div>
+      </div>
+
+      <div class="pager">
+        <button id="prevPage" class="pager-btn" type="button" aria-label="Previous page" disabled>Prev</button>
+        <div class="pager-center">
+          <span id="pageLabel" aria-live="polite">1 / 3</span>
+          <div id="pageDots" class="page-dots"></div>
+        </div>
+        <button id="nextPage" class="pager-btn" type="button" aria-label="Next page">Next</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <span>PaperMint composes nonsense, then typesets it properly.</span>
+    <span class="foot-seed">seed <b id="footSeed">4821</b> · <span id="footGenre">short story</span></span>
+  </footer>
+</body>
+</html>
